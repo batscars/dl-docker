@@ -3,7 +3,7 @@ FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 ADD /data /data
 
 RUN rm /etc/apt/sources.list &&\
-    cp /data/sources.list /etc/apt &&\
+    cp /data/sources.list.16 /etc/apt/sources.list &&\
     rm -rf /etc/apt/sources.list.d
 
 RUN apt-get update && apt-get install -y --no-install-recommends \

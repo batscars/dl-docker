@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 ADD /data /data
 RUN rm /etc/apt/sources.list &&\
-    cp /data/sources.list.16 /etc/apt &&\
+    cp /data/sources.list.16 /etc/apt/sources.list &&\
     rm -r /etc/apt/sources.list.d
 RUN apt-get update && apt-get install -y \
         build-essential \
@@ -21,3 +21,4 @@ RUN apt-get update && apt-get install -y \
         python-opencv && \
     rm -rf /var/lib/apt/lists/*
 RUN pip install pika -i https://mirrors.aliyun.com/pypi/simple/
+RUN rm -rf /data
