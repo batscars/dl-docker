@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER "https://github.com/rastasheep"
+MAINTAINER "battlescars@qq.com"
 
 # Install ssh server and configuration
 RUN apt-get update
@@ -11,7 +11,7 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN mkdir /root/.ssh
 
 # Install python3.5
-RUN apt-get install -y vim tmux python3 python3-pip
+RUN apt-get install -y vim tmux git python3 python3-pip
 
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
