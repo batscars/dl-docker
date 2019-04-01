@@ -1,5 +1,3 @@
-# Built with arch: amd64 flavor: lxde image: ubuntu:18.04 localbuild: 1
-#
 ################################################################################
 # base system
 ################################################################################
@@ -99,5 +97,24 @@ EXPOSE 80
 WORKDIR /root
 ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
-HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
-ENTRYPOINT ["/startup.sh"]
+# HEALTHCHECK --interval=30s --timeout=5s CMD curl --fail http://127.0.0.1:6079/api/health
+
+
+# Install ssh server and configuration
+RUN apt-get update
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'root:root' |chpasswd
+RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+RUN mkdir /root/.ssh
+
+# Install python3.5
+RUN apt-get install -y vim tmux python3 python3-pip
+
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+EXPOSE 22
+# ENTRYPOINT ["/startup.sh"]
+# CMD ["/usr/sbin/sshd", "-D"]
