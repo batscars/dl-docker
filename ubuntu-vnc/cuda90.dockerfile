@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM nvidia/cuda:9.0-devel-ubuntu16.04
 MAINTAINER "battlescars@qq.com"
 
 # Install ssh server and configuration
