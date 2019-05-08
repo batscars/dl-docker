@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-devel-ubuntu16.04
+FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 MAINTAINER "battlescars@qq.com"
 
 # Install ssh server and configuration
@@ -11,7 +11,7 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN mkdir /root/.ssh
 
 # Install python3.5
-RUN apt-get update && apt-get install -y vim tmux git wget python3 python3-pip firefox gedit
+RUN apt-get update && apt-get install -y vim tmux git wget python python-pip python3 python3-pip firefox gedit
 
 # Install vnc
 RUN apt-get install xfce4 vnc4server xfce4-terminal -y
